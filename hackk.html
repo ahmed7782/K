@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed is Hacking</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #00ff00; /* Green text */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* This is the container for the hacking effect */
+        #hackerText {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .text {
+            position: absolute;
+            animation: moveText 5s linear infinite;
+            white-space: nowrap;
+            font-size: 24px;
+        }
+
+        @keyframes moveText {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Centered message with black background */
+        #centeredMessage {
+            position: absolute;
+            text-align: center;
+            font-size: 40px;
+            color: white;
+            z-index: 10; /* Ensure it appears above the hacking text */
+            font-weight: bold;
+            animation: fadeIn 3s ease-in-out;
+            padding: 10px 20px;
+            background-color: black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Black screen to cover the page after 7 seconds */
+        #blackScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 5;
+            display: none; /* Hidden by default */
+        }
+
+        /* Typing effect text */
+        #typingText {
+            font-size: 36px;
+            color: #00ff00;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            border-right: 4px solid #00ff00;
+            animation: typing 5s steps(30) 1s forwards, blink 0.75s step-end infinite;
+            z-index: 15; /* Ensure it appears above the black screen */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes typing {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Dramatic typing effect for hacker style */
+        @keyframes hackerTypingEffect {
+            0% {
+                opacity: 0;
+                width: 0;
+                border-color: transparent;
+            }
+            20% {
+                opacity: 1;
+                width: 15%;
+                border-color: #00ff00;
+            }
+            50% {
+                width: 50%;
+                border-color: #00ff00;
+            }
+            70% {
+                width: 80%;
+            }
+            100% {
+                width: 100%;
+                border-color: transparent;
+            }
+        }
+
+        /* Add hacker typing effect animation */
+        #typingText.hacker {
+            animation: hackerTypingEffect 5s steps(60) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Centered message with black background -->
+    <div id="centeredMessage">Wait... Ahmed is hacking you</div>
+
+    <!-- Hacking effect -->
+    <div id="hackerText"></div>
+
+    <!-- Black screen that will appear after 7 seconds -->
+    <div id="blackScreen"></div>
+
+    <!-- Text that will be typed after black screen appears -->
+    <div id="typingText"></div>
+
+    <script>
+        const hackerText = document.getElementById("hackerText");
+        const blackScreen = document.getElementById("blackScreen");
+        const typingText = document.getElementById("typingText");
+        const centeredMessage = document.getElementById("centeredMessage");
+
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        function generateRandomChar() {
+            return chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        function generateHackerString(length) {
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += generateRandomChar();
+            }
+            return result;
+        }
+
+        function createTextLine() {
+            const hackerString = generateHackerString(window.innerWidth / 10); 
+            const textElement = document.createElement("div");
+            textElement.classList.add("text");
+            textElement.textContent = hackerString;
+            textElement.style.top = `${Math.random() * window.innerHeight}px`; 
+            textElement.style.left = `${Math.random() * window.innerWidth}px`;
+            hackerText.appendChild(textElement);
+        }
+        setInterval(createTextLine, 100);
+        setTimeout(() => {
+            hackerText.style.display = 'none';  
+            blackScreen.style.display = 'block'; 
+            centeredMessage.style.display = 'none'; 
+            typingText.textContent = "Ahmed has already hacked your heart... :)"; 
+            typingText.classList.add('hacker');
+        }, 7000);
+    </script>
+</body>
+</html>

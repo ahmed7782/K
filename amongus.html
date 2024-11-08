@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Background with Crewmate</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: moveParticle 4s linear infinite;
+        }
+
+        @keyframes moveParticle {
+            0% {
+                transform: translate3d(0, 0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate3d(100vw, 0, 0); /* Move to the right */
+                opacity: 0.5;
+            }
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show-message {
+            opacity: 1; /* Will be applied to show the message */
+        }
+
+        #crewmate {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the crewmate */
+            width: 150px;
+            opacity: 0;
+            animation: crewmateAnimation 4s ease-in-out forwards;
+        }
+
+        @keyframes crewmateAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg); /* Start from center with no rotation */
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(10deg); /* Rotate slightly */
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(100vw) translate(-50%, -50%) scale(1) rotate(-10deg); /* Move to the right with rotation */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles container -->
+    <div id="particles-container"></div>
+
+    <!-- Content -->
+    <div class="content" id="message">
+        This website is not for you
+    </div>
+
+    <!-- Crewmate Image -->
+    <img id="crewmate" src="OIP-removebg-preview.png" width="100">
+
+    <script>
+        // Function to create particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const numParticles = 100; // Number of particles to create
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize particle position and animation delay
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const delay = Math.random() * 2 + 's'; // Random delay for animation
+                
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.animationDelay = delay;
+
+                container.appendChild(particle);
+            }
+        }
+
+        // Show the message and particles when the page loads
+        window.onload = function() {
+            createParticles(); // Create particles when the page loads
+
+            const message = document.getElementById('message');
+            const crewmate = document.getElementById('crewmate');
+
+            // Show the message after 4 seconds (timing with crewmate's movement)
+            setTimeout(() => {
+                message.classList.add('show-message');
+            }, 4000); // Message appears after 4 seconds
+
+            // Animate crewmate after page load
+            crewmate.style.opacity = 1;
+        };
+    </script>
+
+</body>
+</html>
