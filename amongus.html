@@ -63,7 +63,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%); /* Center the crewmate */
-            width: 150px;
+            width: 20vw; /* Responsive width */
+            max-width: 150px; /* Max size for larger screens */
             opacity: 0;
             animation: crewmateAnimation 4s ease-in-out forwards;
         }
@@ -80,6 +81,16 @@
             100% {
                 opacity: 1;
                 transform: translateX(100vw) translate(-50%, -50%) scale(1) rotate(-10deg); /* Move to the right with rotation */
+            }
+        }
+
+        /* Ensure text and particles scale for mobile */
+        @media (max-width: 768px) {
+            .content {
+                font-size: 1.5em; /* Slightly smaller text for smaller screens */
+            }
+            #crewmate {
+                width: 30vw; /* Increase the crewmate size on small screens */
             }
         }
     </style>
