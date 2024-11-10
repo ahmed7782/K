@@ -88,9 +88,9 @@
         #typingText {
             font-size: 24px; /* Adjusted font size */
             color: #00ff00;
-            white-space: nowrap;
+            white-space: normal; /* Allows wrapping */
             overflow: hidden;
-            width: 0;
+            width: 100%; /* Ensures it spans the available width */
             border-right: 4px solid #00ff00;
             animation: typing 5s steps(30) 1s forwards, blink 0.75s step-end infinite;
             z-index: 15; /* Ensure it appears above the black screen */
@@ -98,6 +98,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center; /* Centers text */
         }
 
         @keyframes typing {
@@ -211,7 +212,7 @@
             hackerText.style.display = 'none';  
             blackScreen.style.display = 'block'; 
             centeredMessage.style.display = 'none'; 
-            typingText.textContent = "Ahmed has already hacked"<br>"your heart... :)"; 
+            typingText.textContent = "Ahmed has already hacked\nyour heart... :)"; // Split into two lines with \n
             typingText.classList.add('hacker');
         }, 7000);
     </script>
