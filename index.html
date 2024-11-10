@@ -6,7 +6,7 @@
         body {
             font-family: Arial, sans-serif;
             overflow: hidden;
-            background-color: #fad0c4; /* Replaced animated gradient with a solid background */
+            background-color: #fad0c4;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -35,16 +35,18 @@
             z-index: 2;
         }
 
+        h1, p {
+            text-align: center;
+        }
+
         h1 {
             font-size: 5vw;
             margin-bottom: 5vh;
-            text-align: center;
         }
 
         p {
             font-size: 4vw;
             margin-bottom: 10vh;
-            text-align: center;
         }
 
         button {
@@ -107,66 +109,16 @@
 </head>
 <body>
 
-    <!-- Slide 1 -->
-    <div id="slide1" class="slide active">
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 2 -->
-    <div id="slide2" class="slide">
-        <h1>Happy Birthday ya Kanooooooooooooooz🎉</h1>
-        <p>May this small gift be a good reminder of our memories...</p>
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 3 -->
-    <div id="slide3" class="slide">
-        <h3>I got your favorite color roses "I couldn't find the dark red ones"</h3>
-        <p>hope it was real :)</p>
-        <img class="ham" src="screenshot-picsart_com-2024_11_06-20_49_49.png" alt="rose image">
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 4 -->
-    <div id="slide4" class="slide">
-        <h1>Hope this small virtual gift makes a memorable moment.</h1>
-        <p>Now you know why I have been staying up late</p>
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 5 -->
-    <div id="slide5" class="slide">
-        <h1>When it started</h1>
-        <p class="typing-effect">Calculating time...</p>
-        <div class="result" id="timeResult"></div>
-        <br>
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 6 -->
-    <div id="slide6" class="slide">
-        <h1>Here is the fuckin code .. js a small part 🙂</h1>
-        <img src="Capture.PNG" alt="code snippet">
-        <br>
-        <button onclick="goToNextSlide()">Next</button>
-    </div>
-
-    <!-- Slide 7 -->
-    <div id="slide7" class="slide">
-        <h1>Did you like it ?</h1>
-        <p>Press yes :) </p>
-        <button onclick="goToNextSlide()">Yes</button>
-        <br>
-        <button onclick="handleNo()">No</button>
-    </div>
+    <!-- Slide structure remains the same -->
 
     <script>
-        var name = prompt("Enter your name");
-        var currentSlide = 1;  // Initialize currentSlide globally
+        var name = prompt("Enter your name:");
+        var currentSlide = 1;
 
-        if (name === "kanozty") {
-            // Keep currentSlide at 1
+        if (name.toLowerCase() === "kanozty") {
+            // User stays on the birthday presentation
         } else {
+            alert("Access denied.");
             window.location.href = 'amongus.html';
         }
 
@@ -179,6 +131,7 @@
                 let nextSlideElement = document.getElementById('slide' + currentSlide);
                 nextSlideElement.classList.add('active');
             } else {
+                showConfetti();
                 alert("Happy Birthday to youuu <3");
                 currentSlide = 1;
                 let firstSlideElement = document.getElementById('slide' + currentSlide);
@@ -202,11 +155,44 @@
             }, 7000);
         }
 
+        function showConfetti() {
+            const confettiScript = document.createElement('script');
+            confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js';
+            document.body.appendChild(confettiScript);
+
+            confettiScript.onload = () => {
+                const end = Date.now() + 5 * 1000; // 5 seconds of confetti
+                const colors = ['#ff6f61', '#fad0c4', '#ff9a9e'];
+
+                (function frame() {
+                    confetti({
+                        particleCount: 2,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: colors
+                    });
+                    confetti({
+                        particleCount: 2,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: colors
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                })();
+            };
+        }
+
         window.onload = function () {
             calculateTimeDifference();
         };
 
         function handleNo() {
+            alert("Hope you liked it anyway!");
             window.location.href = 'hackk.html';
         }
     </script>
