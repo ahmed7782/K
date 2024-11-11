@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthdayyyyyy</title>
     <style>
+.photo-rope {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0 10px;
+    gap: 15px;
+    position: absolute;
+    top: 0; /* Aligns the images at the top */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.photo {
+    position: relative;
+    transform: rotate(-5deg);
+    transition: transform 0.3s;
+}
+
+.photo img {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+    .photo {
+        position: relative;
+        transform: rotate(-5deg);
+        transition: transform 0.3s;
+    }
+
+    
+    .photo:hover {
+        transform: rotate(5deg) scale(1.05);
+    }
+
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
@@ -144,6 +184,8 @@
             }
         }
     </style>
+    
+
 </head>
 <body>
     <!-- Slide 1 -->
@@ -168,9 +210,26 @@
 
     <!-- Slide 4 -->
     <div id="slide4" class="slide">
+  
         <h1>Hope this small virtual gift makes a memorable moment.</h1>
-        <p>Now you know why I have been staying up late</p>
+        <p>Here are some pics that i got :> cuuuuuuuuuuuuuuuuuuuute</p>
         <button onclick="goToNextSlide()">Next</button>
+        <div class="photo-rope">
+            <div class="photo">
+            <img src="WhatsApp Image 2024-11-11 at 8.33.31 PM (1).jpeg" >
+        </div>
+        <div class="photo">
+            <img src="WhatsApp Image 2024-11-11 at 8.33.31 PM (2).jpeg" >
+        </div>
+        <div class="photo">
+            <img src="WhatsApp Image 2024-11-11 at 8.33.31 PM.jpeg" >
+        </div>
+        <div class="photo">
+            <img src="WhatsApp Image 2024-11-11 at 8.35.16 PM.jpeg" >
+        </div>
+        
+    </div>
+
     </div>
 
     <!-- Slide 5 -->
@@ -197,7 +256,26 @@
         <button onclick="goToNextSlide()">Yes</button>
         <br>
         <button onclick="handleNo()">No</button>
+        <div class="photo-rope">
+            <div class="photo">
+                <img src="WhatsApp Image 2024-11-11 at 8.33.29 PM.jpeg" >
+            </div>
+            <div class="photo">
+                <img src="WhatsApp Image 2024-11-11 at 8.33.30 PM (1).jpeg" >
+            </div>
+            <div class="photo">
+                <img src="WhatsApp Image 2024-11-11 at 8.33.30 PM (2).jpeg" >
+            </div>
+            <div class="photo">
+                <img src="WhatsApp Image 2024-11-11 at 8.33.30 PM.jpeg" >
+            </div>
+            
+            
+        </div>
     </div>
+
+
+    
 
     <script>
         var name = prompt("Enter your name");
@@ -356,6 +434,10 @@
             let firstSlideElement = document.getElementById('slide' + currentSlide);
             firstSlideElement.classList.add('active');
         }
+
+
+
+        
     }
 
 
